@@ -37,7 +37,7 @@ public class ArrowController : MonoBehaviour
          *  Y 좌표에 -0.1f를 지정하면 오브젝트를 조금씩 위에서 아래로 움직인다
          *  프레임 마다 등속으로 낙하시킨다.
          */
-        transform.Translate(0, -0.1f, 0);
+        transform.Translate(0, -5.0f * Time.deltaTime, 0);
 
         /*
          * 화살이 게임화면 밖으로 나오면 화살 오브젝트를 소멸시키는 기능 --> Destory()
@@ -49,7 +49,7 @@ public class ArrowController : MonoBehaviour
          *   매개변수로 자신(화살 오브젝트)을 가르키는 gameobject 변수를 전달하므로 화살이
          *   화면 밖으로 나가올 때 자기 자신을 소멸시킴
          */
-        if(transform.position.y < -5.0f)
+        if (transform.position.y < -5.0f)
         {
             Destroy(gameObject);
         }
@@ -89,10 +89,26 @@ public class ArrowController : MonoBehaviour
          */
         if (fArrowPlayerDistance < fArrowRadius + fPlayerRadius)
         {
+            /*
+             * 플레이어가 화살에 맞으면 화살 컨트롤러에서 감독 스크립트(GameDirector)의 f_DecreaseHp() 메서드를 호출
+             *  즉, ArrowController에서 GameDirector 오브젝트에 있는 f_DecreaseHp() 메서드를 호출하기 때문에
+             *  Find 메서드를 찾아서 GameDirector 오브젝트를 찾는다.
+             */
             GameObject director = GameObject.Find("GameDirector");
-            director.GetComponent<GameDirector>().DecreaseHp();
 
-            Destroy(gameObject);
+            /*
+             * GetComponent 메서드를 사용해 GameDirector 오브젝트의 GameDiretor 스크립트를 구하고,
+             * f_DecreaseHp() 메서드를 구출하여, 감독 스크립트에 플레이와 화살이 충돌했다고 전달
+             */
+            director.GetComponent<GameDirector>().f_DecreaseHp();
+
+            Destroy(gameObject);        // 화살과 플레이어 충돌, 화살 오브젝트를 소멸
+        }
+
+        // 화살의 y값이 -4.5에 도달했을 때 점수를 증가시키는 if문
+        if (transform.position.y <= -4.5f)
+        {
+            GameDirector.instance.IncScore();   // 함수로 점수 증가
         }
     }
 }

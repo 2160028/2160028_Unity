@@ -28,7 +28,7 @@ public class ArrowGenerator : MonoBehaviour
 
     GameObject gArrowinstance = null;       //화살 인스턴스 저장 변수
 
-    float fArrowCreateSpan = 1.0f;          //화살 생성 변수 : 화살을 1초마다 생성 변수
+    float fArrowCreateSpan = 0.5f;          //화살 생성 변수 : 화살을 1초마다 생성 변수
     float fDeltaTime = 0.0f;                // 앞 프레임과 현재 프레임 사이의 시간 차이를 저장하는 변수
 
     int nArrowPositionRange = 0;            //화살의 X 좌표 Range 저장 변수

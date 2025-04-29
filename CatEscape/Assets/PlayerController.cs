@@ -6,8 +6,8 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     //멤버 변수 선언
-    float fMaxPositionX = 10.0f; // 플레이어가 좌, 우 이동시 게임창을 벗어나지 않도록 Vector 최댓값 설정 변수
-    float fminPositionX = -10.0f; // 플레이어가 좌, 우 이동시 게임창을 벗어나지 않도록 Vector 최솟값 설정 변수
+    float fMaxPositionX = 7.0f; // 플레이어가 좌, 우 이동시 게임창을 벗어나지 않도록 Vector 최댓값 설정 변수
+    float fminPositionX = -7.0f; // 플레이어가 좌, 우 이동시 게임창을 벗어나지 않도록 Vector 최솟값 설정 변수
     float fPositionX = 0.0f;    // 플레이어가 좌, 우 이동할 수 있는 X 좌표 저장 변수
     /*
     * Start 메서드
